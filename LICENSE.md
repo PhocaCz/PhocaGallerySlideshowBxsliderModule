@@ -1,1 +1,1 @@
-GPL
+GNU General Public License version 2 or later; http://www.gnu.org/copyleft/gpl.html
