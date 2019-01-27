@@ -1,0 +1,21 @@
+<updates>
+	<update>
+		<name><![CDATA[ Phoca Gallery Slideshow bxSlider Module ]]></name>
+		<description><![CDATA[ Phoca Gallery Slideshow bxSlider Module is a Joomla! module which displays slideshow of Phoca Gallery images in module positon. It is a responsive slideshow module. ]]></description>
+		<element>mod_phocagallery_slideshow_bxslider</element>
+		<type>module</type>
+		<version>4.3.11</version>
+		<infourl title="Phoca Gallery Slideshow bxSlider Module 4.3.11">https://www.phoca.cz/</infourl>
+		<downloads>
+			<downloadurl type="full" format="zip">https://github.com/PhocaCz/PhocaGallerySlideshowBxsliderModule/releases/download/4.3.11/mod_phocagallery_slideshow_bxslider_v4.3.11.zip</downloadurl>
+		</downloads>
+		<tags>
+			<tag>stable</tag>
+		</tags>
+		<maintainer><![CDATA[ Phoca.cz ]]></maintainer>
+		<maintainerurl>https://www.phoca.cz/</maintainerurl>
+		<section>Updates</section>
+		<targetplatform name="joomla" version="3.9"/>
+		<client>1</client>
+	</update>
+</updates>

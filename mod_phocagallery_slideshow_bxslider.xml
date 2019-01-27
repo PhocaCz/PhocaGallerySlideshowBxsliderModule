@@ -1,38 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension type="module" version="3" client="site" method="upgrade">
+<extension type="module" client="site" method="upgrade" version="3">
 	<name>mod_phocagallery_slideshow_bxslider</name>
 	<author>Jan Pavelka (www.phoca.cz)</author>
-	<creationDate>30/07/2014</creationDate>
-	<copyright>Jan Pavelka</copyright>
-	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<creationDate>27/01/2019</creationDate>
 	<authorEmail></authorEmail>
-	<authorUrl>www.phoca.cz</authorUrl>
-	<version>4.0.4</version>
+	<authorUrl>https://www.phoca.cz</authorUrl>
+	<copyright>Jan Pavelka</copyright>
+	<license>GNU/GPL</license>
+	<version>4.3.11</version>
 	<description>MOD_PHOCAGALLERY_SLIDESHOW_BXSLIDER_DESCRIPTION</description>
-	
-	<files>
+	<projectName>PhocaGallerySlideshowBxsliderModule</projectName>
+
+	<media destination="mod_phocagallery_slideshow_bxslider" folder="media">
 		<folder>css</folder>
 		<folder>images</folder>
 		<folder>javascript</folder>
+	</media>
+
+	<files>
 		<folder>models</folder>
 		<folder>tmpl</folder>
-		<folder>language</folder>
+		<filename module="mod_phocagallery_slideshow_bxslider">index.html</filename>
+		<filename module="mod_phocagallery_slideshow_bxslider">manifest.xml</filename>
 		<filename module="mod_phocagallery_slideshow_bxslider">mod_phocagallery_slideshow_bxslider.php</filename>
-		<filename>index.html</filename>
 	</files>
+
 	<languages>
 		<language tag="en-GB">language/en-GB/en-GB.mod_phocagallery_slideshow_bxslider.ini</language>
 		<language tag="en-GB">language/en-GB/en-GB.mod_phocagallery_slideshow_bxslider.sys.ini</language>
 	</languages>
-
 	
 	<config>
 		<fields name="params" addfieldpath="/modules/mod_phocagallery_slideshow_bxslider/models/fields">
 			<fieldset name="basic">	
 			
-<field name="category_id" type="text" default="" label="MOD_PHOCAGALLERY_SLIDESHOW_BXSLIDER_CATEGORY_ID_LABEL" description="MOD_PHOCAGALLERY_SLIDESHOW_BXSLIDER_CATEGORY_ID_DESC" />
+<field name="category_id" type="text" default="" label="MOD_PHOCAGALLERY_SLIDESHOW_BXSLIDER_CATEGORY_ID_LABEL" description="MOD_PHOCAGALLERY_SLIDESHOW_BXSLIDER_CATEGORY_ID_DESC"/>
 
-<field name="count_images" type="text" default="5" label="MOD_PHOCAGALLERY_SLIDESHOW_BXSLIDER_COUNT_IMAGES_LABEL" description="MOD_PHOCAGALLERY_SLIDESHOW_BXSLIDER_COUNT_IMAGES_DESC" />
+<field name="count_images" type="text" default="5" label="MOD_PHOCAGALLERY_SLIDESHOW_BXSLIDER_COUNT_IMAGES_LABEL" description="MOD_PHOCAGALLERY_SLIDESHOW_BXSLIDER_COUNT_IMAGES_DESC"/>
 <!--
 <field name="width" type="text" default="970" label="MOD_PHOCAGALLERY_SLIDESHOW_BXSLIDER_WIDTH_LABEL" description="MOD_PHOCAGALLERY_SLIDESHOW_BXSLIDER_WIDTH_DESC" />
 
@@ -56,14 +60,14 @@
 	<option value="16">MOD_PHOCAGALLERY_SLIDESHOW_BXSLIDER_HITS_DESC</option>
 </field>
 
-<field name="slideshow_params" type="textarea" default="auto: true, pager: false, speed: 1500, controls: false,  easing: 'easeInBounce'" label="MOD_PHOCAGALLERY_SLIDESHOW_BXSLIDER_SLIDESHOW_PARAMETERS_LABEL" description="MOD_PHOCAGALLERY_SLIDESHOW_BXSLIDER_SLIDESHOW_PARAMETERS_DESC" />
+<field name="slideshow_params" type="textarea" default="auto: true, pager: false, speed: 1500, controls: false,  easing: 'easeInBounce'" label="MOD_PHOCAGALLERY_SLIDESHOW_BXSLIDER_SLIDESHOW_PARAMETERS_LABEL" description="MOD_PHOCAGALLERY_SLIDESHOW_BXSLIDER_SLIDESHOW_PARAMETERS_DESC"/>
 
 <field name="load_bxslider_css" type="list" default="1" label="MOD_PHOCAGALLERY_SLIDESHOW_BXSLIDER_LOAD_BXSLIDER_CSS_LABEL" description="MOD_PHOCAGALLERY_SLIDESHOW_BXSLIDER_LOAD_BXSLIDER_CSS_DESC">
 	<option value="1">MOD_PHOCAGALLERY_SLIDESHOW_BXSLIDER_YES</option>
 	<option value="0">MOD_PHOCAGALLERY_SLIDESHOW_BXSLIDER_NO</option>
 </field>
 
-<field name="spacer2" type="spacer" hr="true" />
+<field name="spacer2" type="spacer" hr="true"/>
 
 <field name="url_link" type="list" default="0" label="MOD_PHOCAGALLERY_SLIDESHOW_BXSLIDER_URL_LINK_LABEL" description="MOD_PHOCAGALLERY_SLIDESHOW_BXSLIDER_URL_LINK_DESC">
 	<option value="0">MOD_PHOCAGALLERY_SLIDESHOW_BXSLIDER_NO_LINK</option>
@@ -73,14 +77,14 @@
 	<option value="10">MOD_PHOCAGALLERY_SLIDESHOW_BXSLIDER_SINGLE_LINK</option>
 </field>
 
-<field name="target" type="list" class="inputbox"  label="MOD_PHOCAGALLERY_SLIDESHOW_BXSLIDER_TARGET_LINK_LABEL" description="MOD_PHOCAGALLERY_SLIDESHOW_BXSLIDER_TARGET_LINK_DESC"  default="_self" >
+<field name="target" type="list" class="inputbox" label="MOD_PHOCAGALLERY_SLIDESHOW_BXSLIDER_TARGET_LINK_LABEL" description="MOD_PHOCAGALLERY_SLIDESHOW_BXSLIDER_TARGET_LINK_DESC" default="_self">
 	<option value="_self">MOD_PHOCAGALLERY_SLIDESHOW_BXSLIDER_OPEN_WINDOW_SELF</option>
 	<option value="_blank">MOD_PHOCAGALLERY_SLIDESHOW_BXSLIDER_OPEN_WINDOW_BLANK</option>
 	<option value="_parent">MOD_PHOCAGALLERY_SLIDESHOW_BXSLIDER_OPEN_WINDOW_PARENT</option>
 	<option value="_top">MOD_PHOCAGALLERY_SLIDESHOW_BXSLIDER_OPEN_WINDOW_TOP</option>
 </field>
 
-<field name="single_link" type="text" default="" label="MOD_PHOCAGALLERY_SLIDESHOW_BXSLIDER_SINGLE_LINK_LABEL" description="MOD_PHOCAGALLERY_SLIDESHOW_BXSLIDER_SINGLE_LINK_DESC" />
+<field name="single_link" type="text" default="" label="MOD_PHOCAGALLERY_SLIDESHOW_BXSLIDER_SINGLE_LINK_LABEL" description="MOD_PHOCAGALLERY_SLIDESHOW_BXSLIDER_SINGLE_LINK_DESC"/>
 
 
 
@@ -88,9 +92,9 @@
 
 			
 			<fieldset name="advanced">
-		<field name="moduleclass_sfx" type="text" label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL" description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
+		<field name="moduleclass_sfx" type="text" label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL" description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC"/>
 				
-		<field name="module_css_style" type="text" label="MOD_PHOCAGALLERY_SLIDESHOW_BXSLIDER_CSS_STYLE_LABEL" description="MOD_PHOCAGALLERY_SLIDESHOW_BXSLIDER_CSS_STYLE_DESC" />
+		<field name="module_css_style" type="text" label="MOD_PHOCAGALLERY_SLIDESHOW_BXSLIDER_CSS_STYLE_LABEL" description="MOD_PHOCAGALLERY_SLIDESHOW_BXSLIDER_CSS_STYLE_DESC"/>
 				
 		<field name="cache" type="list" default="0" label="COM_MODULES_FIELD_CACHING_LABEL" description="COM_MODULES_FIELD_CACHING_DESC">
 			<option value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
@@ -98,4 +102,8 @@
 			</fieldset>
 		</fields>
 	</config>
+
+	<updateservers>
+		<server type="extension" name="MOD_PHOCAGALLERY_SLIDESHOW_BXSLIDER"><![CDATA[https://raw.githubusercontent.com/PhocaCz/PhocaGallerySlideshowBxsliderModule/master/manifest.xml]]></server>
+	</updateservers>
 </extension>

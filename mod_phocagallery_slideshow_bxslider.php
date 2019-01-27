@@ -8,21 +8,32 @@
  */
 
 defined('_JEXEC') or die('Restricted access');
-if(!defined('DS')) define('DS', DIRECTORY_SEPARATOR);
+
+// Include Phoca Gallery
 if (!JComponentHelper::isEnabled('com_phocagallery', true)) {
-	return JError::raiseError(JText::_('Phoca Gallery Error'), JText::_('Phoca Gallery is not installed on your system'));
+    echo '<div class="alert alert-danger">Phoca Gallery Error: Phoca Gallery component is not installed or not published on your system</div>';
+    return;
 }
 
-if (! class_exists('PhocaGalleryLoader')) {
-    require_once( JPATH_ADMINISTRATOR.DS.'components'.DS.'com_phocagallery'.DS.'libraries'.DS.'loader.php');
+if (!class_exists('PhocaGalleryLoader')) {
+    require_once( JPATH_ADMINISTRATOR.'/components/com_phocagallery/libraries/loader.php');
 }
 
 phocagalleryimport('phocagallery.path.path');
 phocagalleryimport('phocagallery.path.route');
+phocagalleryimport('phocagallery.library.library');
+phocagalleryimport('phocagallery.text.text');
+phocagalleryimport('phocagallery.access.access');
 phocagalleryimport('phocagallery.file.file');
 phocagalleryimport('phocagallery.file.filethumbnail');
-phocagalleryimport('phocagallery.text.text');
+phocagalleryimport('phocagallery.image.image');
+phocagalleryimport('phocagallery.image.imagefront');
+phocagalleryimport('phocagallery.render.renderfront');
+phocagalleryimport('phocagallery.render.renderadmin');
+phocagalleryimport('phocagallery.render.renderdetailwindow');
 phocagalleryimport('phocagallery.ordering.ordering');
+phocagalleryimport('phocagallery.picasa.picasa');
+phocagalleryimport('phocagallery.html.category');
 
 $db 		= JFactory::getDBO();
 $document	= JFactory::getDocument();
@@ -39,16 +50,16 @@ $target		 					= $params->get( 'target', '_self' );
 $s['params'] 					= $params->get( 'slideshow_params', 'auto: true,pager: false,speed: 1500, controls: false, easing: \'easeInBounce\'' );
 $load_bxslider_css		 		= $params->get( 'load_bxslider_css', 1 );
 
-if ($load_bxslider_css == 1) {				
+if ($load_bxslider_css == 1) {
 	JHTML::stylesheet('modules/mod_phocagallery_slideshow_bxslider/javascript/jquery.bxslider.css' );
 }
 JHTML::stylesheet('modules/mod_phocagallery_slideshow_bxslider/css/style.css' );
 //$document->addScript(JURI::base(true).'/components/com_phocagallery/assets/jquery/jquery-1.6.4.min.js');
 JHtml::_('jquery.framework', false);
 
-$document->addScript(JURI::base(true).'/modules/mod_phocagallery_slideshow_bxslider/javascript/plugins/jquery.easing.1.3.js');
-$document->addScript(JURI::base(true).'/modules/mod_phocagallery_slideshow_bxslider/javascript/plugins/jquery.fitvids.js');
-$document->addScript(JURI::base(true).'/modules/mod_phocagallery_slideshow_bxslider/javascript/jquery.bxslider.js');
+$document->addScript(JURI::base(true).'/media/mod_phocagallery_slideshow_bxslider/javascript/plugins/jquery.easing.1.3.js');
+$document->addScript(JURI::base(true).'/media/mod_phocagallery_slideshow_bxslider/javascript/plugins/jquery.fitvids.js');
+$document->addScript(JURI::base(true).'/media/mod_phocagallery_slideshow_bxslider/javascript/jquery.bxslider.js');
 
 $catidSQL = '';
 if ((int)$catId > 0) {
@@ -56,7 +67,7 @@ if ((int)$catId > 0) {
 }
 
 if ($image_ordering == 9) {
-	$imageOrdering = ' ORDER BY RAND()'; 
+	$imageOrdering = ' ORDER BY RAND()';
 } else {
 	$iOA = PhocaGalleryOrdering::getOrderingString($image_ordering);
 	$imageOrdering = $iOA['output'];
@@ -76,15 +87,15 @@ $images = $db->loadObjectList();
 
 $i 	= count($images);
 if ($i > 0) {
-	
+
 	echo '<ul class="pgbx-bxslider bxslider">'. "\n";
 	foreach ($images as $k => $v) {
-		
+
     echo '<li>';//. "\n";
-	
+
 	$urlLink 	= '';
 	if ($url_link == 0) {
-	
+
 	} else if ($url_link == 1) {
 		if (isset($v->extlink1)) {
 			$v->extlink1	= explode("|", $v->extlink1, 4);
@@ -111,16 +122,16 @@ if ($i > 0) {
 		}
 	} else if ($url_link == 3) {
 		$urlLink =  PhocaGalleryRoute::getCategoryRoute($v->categoryid, $v->categoryalias);
-	
+
 	} else {
 		if ($single_link != '') {
 			$urlLink 	= 'http://'.$single_link;
 			$target		= '_self';
 		}
 	}
-    
+
 	echo '<a href="'.$urlLink.'" target="'.$target.'">';
-	
+
 	$captionOutput  = '';
 	$caption 		= '';
 	if ($v->title != '') {
@@ -135,17 +146,17 @@ if ($i > 0) {
 	if ($caption != '') {
 		$captionOutput = 'title="'.$caption.'"';
 	}
-	
-	
+
+
 	if (isset($v->extl) &&  $v->extl != '') {
 		echo '<img src="'.PhocaGalleryText::strTrimAll($v->extl).'" alt="'.htmlspecialchars($v->title).'" '.$captionOutput.' />';
 	} else {
 		$thumbLink	= PhocaGalleryFileThumbnail::getThumbnailName($v->filename, 'large');
 		echo '<img src="'.JURI::base(true).'/'.$thumbLink->rel.'" alt="'.htmlspecialchars($v->title).'" '.$captionOutput.'  />';
 	}
-	
+
 	echo '</a>';//. "\n";
-	
+
 /*	// Label
 	$label = '';
 	if ($s['label'] == '1') {
@@ -158,13 +169,13 @@ if ($i > 0) {
 			$label .= ' - '. $v->description;
 		}
 	}
-	
+
 	if ($label != '') {
 		echo '<div class="label_text">';
 		echo '<p>'.strip_tags($label).'</p>';
 		echo '</div>'. "\n";
     }*/
-	
+
 	echo '</li>'. "\n";
 	}
 	echo '</ul>';
