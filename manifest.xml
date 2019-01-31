@@ -16,6 +16,6 @@
 		<maintainerurl>https://www.phoca.cz/</maintainerurl>
 		<section>Updates</section>
 		<targetplatform name="joomla" version="3.9"/>
-		<client>1</client>
+		<client>0</client>
 	</update>
 </updates>
