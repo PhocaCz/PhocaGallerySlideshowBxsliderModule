@@ -16,6 +16,8 @@ Phoca Gallery Slideshow bxSlider Module is a Joomla! module which displays slide
 
 [Phoca Gallery Slideshow bxSlider Module](https://www.phoca.cz/phoca-gallery-slideshow-bxslider-module)
 
+[Phoca Gallery Info Page](https://www.phoca.cz/project/phocagallery-joomla-gallery)
+
 
 
 ## Documentation
